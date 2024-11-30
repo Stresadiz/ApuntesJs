@@ -34,20 +34,40 @@ console.log(Array.from(finalSet));
     Colección de valores únicos: Crea un Set para almacenar una colección de valores únicos. 
     Implementa funciones para agregar, eliminar y verificar la existencia de un valor en el Set.
 
-*/
-let uniqueSet = new Set();
-let option = "";
-let value = "";
-let valuesInput = []
-
-do {
-    option = prompt(`Ingrese una opcion: \n
-                    1- Agregar al set \n
-                    2- Eliminar del Set \n
-                    3- Validar existencia en Set \n
-                    4- Listar Set `);
-
-} while (option != "" && value != "");
+    let uniqueSet = new Set();
+    let option = "";
+    let value = "";
+    let valuesInput = []
+    
+    do {
+        resetValues()
+        
+        option = prompt(`Ingrese una opcion: \n
+        1- Agregar al set \n
+        2- Eliminar del Set \n
+        3- Validar existencia en Set \n
+        4- Listar Set `);
+        
+        if (Number(option) === 1) {
+            value = prompt("Ingrese el valor a añadir al Set");
+            if (value!= "") {
+                addToSet(value)
+            }
+        } else if (Number(option) === 2) {
+            value = prompt("Ingrese el valor a eliminar del Set");
+            if (value!= "" && validateExist(value)) {
+                deleteFromSet(value)
+            }
+        } else if (Number(option) === 3) {
+            value = prompt("Ingrese el valor a buscar");
+            if (value!= "") {     
+            checkIfExist(value);
+        }
+    } else if (Number(option) === 4) {
+        listSet();
+    }
+    
+} while (option != "" || value != "");
 
 function addToSet(value) {
     console.log("El valor ingresado es " + value);
@@ -56,11 +76,53 @@ function addToSet(value) {
     if (uniqueSet.has(value)) {
         console.log("El valor ya existe en el set");
     } else{
-        uniqueSet(value);
-        console.log("Nuevo valor <<" + value + ">> agregado al set");
-    }
+        uniqueSet.add(value);
+    console.log("Nuevo valor <<" + value + ">> agregado al set");
+}
 }
 
-function deleteFromSet(){
-    //Funcion Delete
+function deleteFromSet(value){
+    uniqueSet.delete(value);
+    console.log("El valor <<" + value + ">> fue eliminado");
+    
 }
+
+function checkIfExist(value) {
+    if (validateExist(value)) {
+        console.log("El valor <<" + value + ">> existe en el Set");
+    } else{
+        console.log("El valor no existe en el set");
+}
+}
+
+function validateExist(value){
+    return uniqueSet.has(value);
+}
+function listSet() {
+    console.log("Listado de Set:");
+    
+    if (uniqueSet.size > 0) {
+        for (const value of uniqueSet) {
+            console.log("Valor: " + value);
+        }
+    } else{
+        console.log("El set se encuentra vacio");
+}
+
+if (valuesInput.length > 0) {
+    console.log("Los valores historicos ingresados son:");
+    
+    valuesInput.forEach(valueH => {
+        console.log("- " + valueH);
+    });
+} else{
+    console.log("No hay valores historicos ingresados");
+}
+
+}
+
+function resetValues() {
+    option = "";
+    value = "";
+}
+*/
