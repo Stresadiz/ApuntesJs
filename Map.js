@@ -120,7 +120,7 @@ function findInMap() {
   
     -Usa Map para crear una agenda de contactos donde las claves sean nombres y los valores sean números de teléfono.
         Implementa una función para agregar, eliminar y buscar contactos.
-*/
+
 
 let contactsMap = new Map();
 
@@ -182,5 +182,53 @@ function searchContact(contact) {
 function listContacts() {
     for (const [key, value] of contactsMap) {
         console.log(`${key} - ${value}`);
+    }
+}
+
+    -Crea un Map que represente un inventario con nombres de productos como claves y cantidades como valores. 
+        Luego, implementa una función que actualice la cantidad de un producto dado su nombre.
+*/
+
+let stockMap = new Map();
+
+let pName = "";
+let pCount = 0;
+
+do {
+    pName = prompt("Ingrese el nombre del producto: (Ingrese ya existente para actualizar | Deje vacio para cerrar programa)");
+    if (pName != "") {
+        pCount = prompt(`Ingrese la cantidad de ${pName}`)
+        addProduct(pName, pCount);
+    }
+
+    getStock(stockMap);
+    
+} while (pName != "");
+
+function addProduct(p, v) {
+    if (!isNaN(Number(v))) {
+        if (!stockMap.has(p)) {
+            stockMap.set(p, v);
+        } else{
+            updateProduct(p, v, stockMap)
+        }
+    }
+}
+
+function updateProduct(p, v, map) {
+    let lastValue = map.get(p)
+    map.delete(p);
+    map.set(p, v);
+    alert(`Se actualiza el producto ${p}, cant. vieja ${lastValue}, cant. nueva ${v}`)
+}
+
+function getStock(stockMap){
+    console.log("El inventario actual es:");
+    if (stockMap.size > 0) {
+        for (const [key, value] of stockMap) {
+            console.log(`${key} - ${value}u`);
+        }
+    } else{
+        console.log("El inventario está vacio");
     }
 }
