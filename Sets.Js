@@ -2,12 +2,6 @@
 Eliminar duplicados: Dado un array de números, 
     usa Set para eliminar los elementos duplicados y devuelve un array con los elementos únicos.
 
-Intersección de conjuntos: Dado dos arrays, usa Set para encontrar la intersección 
-    (elementos comunes) entre ellos.
-
-Unión de conjuntos: Dado dos arrays, usa Set para encontrar la unión 
-    (todos los elementos únicos) de ambos arrays.
-
     //  1er Ejercicio
 
     let numsArray = [1, 2, 6, 8, 2, 5, 9, 1];
@@ -125,4 +119,37 @@ function resetValues() {
     option = "";
     value = "";
 }
+
+    
+Intersección de conjuntos: Dado dos arrays, usa Set para encontrar la intersección 
+    (elementos comunes) entre ellos.
+
+let arrOne = [1, 2, 4, 6, 8, 10]
+let arrTwo = [1, 1, 4, 4, 2, 2, 5, 2, 7, 8]
+
+let fSet = new Set(arrOne);
+let sSet = new Set(arrTwo);
+
+let setIntersec = new Set(Array.from(fSet).filter(x => sSet.has(x)));
+
+console.log(setIntersec);
+
+    
+Unión de conjuntos: Dado dos arrays, usa Set para encontrar la unión 
+    (todos los elementos únicos) de ambos arrays.
 */
+
+let fSet = new Set([1, 2, 4, 6, 8, 10]);
+let sSet = new Set([1, 1, 4, 4, 2, 2, 5, 2, 7, 8]);
+
+let setIntersec = new Set();
+
+fSet.forEach(e => {
+    setIntersec.add(e);
+});
+
+sSet.forEach(e=>{
+    setIntersec.add(e)
+})
+
+console.log(setIntersec);
